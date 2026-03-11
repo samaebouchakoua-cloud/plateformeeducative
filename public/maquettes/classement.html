@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement - EduPlateforme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .leaderboard-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .leaderboard-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+            height: 200px;
+        }
+
+        .podium-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+
+        .podium-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--white);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .podium-medal {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+        }
+
+        .podium-rank-1 .podium-medal { color: #FBBF24; } /* Gold */
+        .podium-rank-2 .podium-medal { color: #9CA3AF; } /* Silver */
+        .podium-rank-3 .podium-medal { color: #D97706; } /* Bronze */
+
+        .podium-name {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .podium-score {
+            color: var(--primary-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .podium-base {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .podium-rank-1 .podium-base { height: 120px; background-color: rgba(255, 255, 255, 0.3); }
+        .podium-rank-2 .podium-base { height: 90px; }
+        .podium-rank-3 .podium-base { height: 70px; }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .leaderboard-table th {
+            text-align: left;
+            padding: 1rem;
+            color: var(--gray-500);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .leaderboard-row {
+            background-color: var(--white);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .leaderboard-row:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .leaderboard-row td {
+            padding: 1rem;
+            background-color: var(--white);
+        }
+
+        .leaderboard-row td:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+            border-left: 2px solid transparent;
+        }
+
+        .leaderboard-row td:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .leaderboard-row.current-user td:first-child {
+            border-left-color: var(--primary);
+        }
+
+        .leaderboard-row.current-user {
+            background-color: var(--primary-light);
+        }
+
+        .leaderboard-row.current-user td {
+            background-color: var(--primary-light);
+        }
+
+        .rank-number {
+            font-weight: 700;
+            color: var(--gray-500);
+            width: 40px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .rank-1 { color: #F59E0B; }
+        .rank-2 { color: #6B7280; }
+        .rank-3 { color: #B45309; }
+
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .user-avatar-small {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard_eleve.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="mes_challenges.html" class="nav-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Mes Challenges</span>
+                </a>
+                <a href="ma_progression.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Ma Progression</span>
+                </a>
+                <a href="classement.html" class="nav-item active">
+                    <i class="fas fa-medal"></i>
+                    <span>Classement</span>
+                </a>
+                <a href="mon_profil.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mon Profil</span>
+                </a>
+            </nav>
+            <div style="padding: 1.5rem 1rem; border-top: 1px solid var(--gray-200);">
+                <a href="login.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fas fa-sign-out-alt" style="color: var(--danger);"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <header class="topbar">
+                <h1 class="page-title">Classement</h1>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="avatar">A</div>
+                        <span style="font-weight: 500; font-size: 0.875rem;">Alex M.</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <div class="leaderboard-header animate-fade-in">
+                    <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: white;">Meilleurs Élèves</h2>
+                    <p style="color: var(--primary-light); opacity: 0.9;">Classement global de la semaine</p>
+
+                    <div class="podium">
+                        <!-- Rank 2 -->
+                        <div class="podium-item podium-rank-2">
+                            <div class="podium-avatar">
+                                S
+                                <i class="fas fa-medal podium-medal"></i>
+                            </div>
+                            <div class="podium-name">Sarah L.</div>
+                            <div class="podium-score">14,250 pts</div>
+                            <div class="podium-base">2</div>
+                        </div>
+
+                        <!-- Rank 1 -->
+                        <div class="podium-item podium-rank-1">
+                            <div class="podium-avatar" style="width: 80px; height: 80px; font-size: 2rem;">
+                                T
+                                <i class="fas fa-crown podium-medal"></i>
+                            </div>
+                            <div class="podium-name" style="font-size: 1.125rem;">Thomas B.</div>
+                            <div class="podium-score">15,800 pts</div>
+                            <div class="podium-base">1</div>
+                        </div>
+
+                        <!-- Rank 3 -->
+                        <div class="podium-item podium-rank-3">
+                            <div class="podium-avatar">
+                                M
+                                <i class="fas fa-medal podium-medal"></i>
+                            </div>
+                            <div class="podium-name">Marie K.</div>
+                            <div class="podium-score">13,900 pts</div>
+                            <div class="podium-base">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-in" style="animation-delay: 0.1s; background: transparent; border: none; box-shadow: none; padding: 0;">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Position</th>
+                                <th>Élève</th>
+                                <th>Niveau</th>
+                                <th>Challenges Réussis</th>
+                                <th style="text-align: right;">Score Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="leaderboard-row">
+                                <td style="text-align: center;"><span class="rank-number">4</span></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-small">L</div>
+                                        Lucas D.
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-primary">Expert</span></td>
+                                <td>42</td>
+                                <td style="text-align: right; font-weight: 700; color: var(--primary);">12,450</td>
+                            </tr>
+                            <tr class="leaderboard-row">
+                                <td style="text-align: center;"><span class="rank-number">5</span></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-small">E</div>
+                                        Emma R.
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-primary">Expert</span></td>
+                                <td>38</td>
+                                <td style="text-align: right; font-weight: 700; color: var(--primary);">11,800</td>
+                            </tr>
+                            <tr class="leaderboard-row">
+                                <td style="text-align: center;"><span class="rank-number">6</span></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-small">J</div>
+                                        Julien M.
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-success">Avancé</span></td>
+                                <td>35</td>
+                                <td style="text-align: right; font-weight: 700; color: var(--primary);">10,950</td>
+                            </tr>
+                            <!-- Current User Row -->
+                            <tr class="leaderboard-row current-user">
+                                <td style="text-align: center;"><span class="rank-number">14</span></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-small" style="background-color: var(--primary); color: white;">A</div>
+                                        Alex M. (Vous)
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-success">Avancé</span></td>
+                                <td>24</td>
+                                <td style="text-align: right; font-weight: 700; color: var(--primary);">8,250</td>
+                            </tr>
+                            <tr class="leaderboard-row">
+                                <td style="text-align: center;"><span class="rank-number">15</span></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar-small">C</div>
+                                        Chloé F.
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-success">Avancé</span></td>
+                                <td>22</td>
+                                <td style="text-align: right; font-weight: 700; color: var(--primary);">7,900</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

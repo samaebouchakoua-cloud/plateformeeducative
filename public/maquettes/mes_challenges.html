@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Challenges - EduPlateforme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 1rem 0;
+            color: var(--gray-500);
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .tab:hover {
+            color: var(--gray-800);
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+        }
+
+        .search-box input {
+            padding-left: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard_eleve.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="mes_challenges.html" class="nav-item active">
+                    <i class="fas fa-trophy"></i>
+                    <span>Mes Challenges</span>
+                </a>
+                <a href="ma_progression.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Ma Progression</span>
+                </a>
+                <a href="classement.html" class="nav-item">
+                    <i class="fas fa-medal"></i>
+                    <span>Classement</span>
+                </a>
+                <a href="mon_profil.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mon Profil</span>
+                </a>
+            </nav>
+            <div style="padding: 1.5rem 1rem; border-top: 1px solid var(--gray-200);">
+                <a href="login.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fas fa-sign-out-alt" style="color: var(--danger);"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Topbar -->
+            <header class="topbar">
+                <h1 class="page-title">Mes Challenges</h1>
+                <div class="topbar-right">
+                    <button class="notification-btn">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">A</div>
+                        <span style="font-weight: 500; font-size: 0.875rem;">Alex M.</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--gray-400);"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                
+                <div class="tabs animate-fade-in">
+                    <button class="tab">Disponibles (12)</button>
+                    <button class="tab active">En cours (2)</button>
+                    <button class="tab">Terminés (45)</button>
+                </div>
+
+                <div class="filter-bar animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" placeholder="Rechercher un challenge...">
+                    </div>
+                    <select class="form-control" style="width: auto;">
+                        <option value="">Toutes les matières</option>
+                        <option value="math">Mathématiques</option>
+                        <option value="physique">Physique</option>
+                        <option value="histoire">Histoire</option>
+                    </select>
+                    <select class="form-control" style="width: auto;">
+                        <option value="">Tous les niveaux</option>
+                        <option value="facile">Facile</option>
+                        <option value="moyen">Moyen</option>
+                        <option value="difficile">Difficile</option>
+                    </select>
+                </div>
+                
+                <div class="grid grid-cols-3 animate-fade-in" style="animation-delay: 0.2s;">
+                    <!-- Challenge Card 1 -->
+                    <div class="card challenge-card">
+                        <div class="challenge-header">
+                            <div>
+                                <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Niveau Difficile</span>
+                                <h4 class="challenge-title">Algèbre & Fonctions</h4>
+                                <span class="challenge-subject">Mathématiques</span>
+                            </div>
+                            <div class="stat-icon" style="width: 40px; height: 40px; font-size: 1.25rem;">
+                                <i class="fas fa-square-root-alt"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-meta">
+                            <div class="challenge-meta-item">
+                                <i class="far fa-clock"></i> 30 min
+                            </div>
+                            <div class="challenge-meta-item">
+                                <i class="far fa-question-circle"></i> 15 Questions
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="progress-header" style="font-size: 0.75rem;">
+                                <span>Progression (6/15)</span>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar-bg" style="height: 6px;">
+                                <div class="progress-bar-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-footer">
+                            <span style="font-size: 0.875rem; color: var(--warning); font-weight: 500;">Expire dans 2j</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Reprendre</button>
+                        </div>
+                    </div>
+
+                    <!-- Challenge Card 2 -->
+                    <div class="card challenge-card">
+                        <div class="challenge-header">
+                            <div>
+                                <span class="badge badge-warning" style="margin-bottom: 0.5rem;">Niveau Moyen</span>
+                                <h4 class="challenge-title">Guerre Froide</h4>
+                                <span class="challenge-subject">Histoire</span>
+                            </div>
+                            <div class="stat-icon" style="width: 40px; height: 40px; font-size: 1.25rem; background-color: var(--success-light); color: var(--success);">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-meta">
+                            <div class="challenge-meta-item">
+                                <i class="far fa-clock"></i> 20 min
+                            </div>
+                            <div class="challenge-meta-item">
+                                <i class="far fa-question-circle"></i> 10 Questions
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="progress-header" style="font-size: 0.75rem;">
+                                <span>Progression (8/10)</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar-bg" style="height: 6px;">
+                                <div class="progress-bar-fill" style="width: 80%; background-color: var(--success);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-footer">
+                            <span style="font-size: 0.875rem; color: var(--gray-500); font-weight: 500;">Dernier essai il y a 1h</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Reprendre</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

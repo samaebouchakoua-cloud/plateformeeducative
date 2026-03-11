@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Progression - EduPlateforme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-top: 2rem;
+            position: relative;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 2rem;
+        }
+
+        .chart-bar {
+            width: 40px;
+            background-color: var(--primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+            transition: height 1s ease-out;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .chart-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .chart-bar::before {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--gray-800);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .chart-bar:hover::before {
+            opacity: 1;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100px;
+            text-align: center;
+        }
+
+        .badge-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gray-400);
+            position: relative;
+        }
+
+        .badge-icon.earned {
+            background-color: var(--warning-light);
+            color: var(--warning);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .badge-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard_eleve.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="mes_challenges.html" class="nav-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Mes Challenges</span>
+                </a>
+                <a href="ma_progression.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Ma Progression</span>
+                </a>
+                <a href="classement.html" class="nav-item">
+                    <i class="fas fa-medal"></i>
+                    <span>Classement</span>
+                </a>
+                <a href="mon_profil.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mon Profil</span>
+                </a>
+            </nav>
+            <div style="padding: 1.5rem 1rem; border-top: 1px solid var(--gray-200);">
+                <a href="login.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fas fa-sign-out-alt" style="color: var(--danger);"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <header class="topbar">
+                <h1 class="page-title">Ma Progression</h1>
+                <div class="topbar-right">
+                    <button class="notification-btn">
+                        <i class="far fa-bell"></i>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">A</div>
+                        <span style="font-weight: 500; font-size: 0.875rem;">Alex M.</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--gray-400);"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <div class="grid grid-cols-4 animate-fade-in" style="margin-bottom: 2rem;">
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--primary-light); color: var(--primary);">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Taux de réussite</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--success-light); color: var(--success);">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">142</div>
+                            <div class="stat-label">Bonnes réponses</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--warning-light); color: var(--warning);">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">12h</div>
+                            <div class="stat-label">Temps passé</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--danger-light); color: var(--danger);">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Badges obtenus</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 animate-fade-in" style="animation-delay: 0.1s;">
+                    <!-- Chart Section -->
+                    <div class="card">
+                        <div class="section-header" style="margin-top: 0; margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem;">Évolution des points cumulés</h3>
+                            <select class="form-control" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.875rem;">
+                                <option>Ce mois</option>
+                                <option>Cette semaine</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-bar" style="height: 30%;" data-value="120" data-label="Lun"></div>
+                            <div class="chart-bar" style="height: 45%;" data-value="180" data-label="Mar"></div>
+                            <div class="chart-bar" style="height: 20%;" data-value="80" data-label="Mer"></div>
+                            <div class="chart-bar" style="height: 60%;" data-value="240" data-label="Jeu"></div>
+                            <div class="chart-bar" style="height: 75%;" data-value="300" data-label="Ven"></div>
+                            <div class="chart-bar" style="height: 50%;" data-value="200" data-label="Sam"></div>
+                            <div class="chart-bar" style="height: 85%;" data-value="340" data-label="Dim"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Badges Section -->
+                    <div class="card">
+                        <div class="section-header" style="margin-top: 0; margin-bottom: 1.5rem;">
+                            <h3 style="font-size: 1.125rem;">Mes Badges</h3>
+                            <a href="#" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="badge-list">
+                            <div class="badge-item">
+                                <div class="badge-icon earned">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <span class="badge-title">Flamme de départ</span>
+                            </div>
+                            <div class="badge-item">
+                                <div class="badge-icon earned" style="background-color: var(--primary-light); color: var(--primary);">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <span class="badge-title">Érudit</span>
+                            </div>
+                            <div class="badge-item">
+                                <div class="badge-icon earned" style="background-color: var(--success-light); color: var(--success);">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <span class="badge-title">Génie Math</span>
+                            </div>
+                            <div class="badge-item">
+                                <div class="badge-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <span class="badge-title" style="color: var(--gray-400);">Champion</span>
+                            </div>
+                        </div>
+
+                        <div class="section-header" style="margin-bottom: 1rem;">
+                            <h3 style="font-size: 1.125rem;">Matières maîtrisées</h3>
+                        </div>
+                        
+                        <div class="progress-container" style="margin-top: 0; margin-bottom: 1rem;">
+                            <div class="progress-header">
+                                <span>Mathématiques</span>
+                                <span>Niveau 5 (75%)</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 75%; background-color: var(--primary);"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container" style="margin-top: 0; margin-bottom: 1rem;">
+                            <div class="progress-header">
+                                <span>Histoire</span>
+                                <span>Niveau 6 (90%)</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 90%; background-color: var(--success);"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-container" style="margin-top: 0;">
+                            <div class="progress-header">
+                                <span>Physique</span>
+                                <span>Niveau 3 (40%)</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 40%; background-color: #8B5CF6;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
