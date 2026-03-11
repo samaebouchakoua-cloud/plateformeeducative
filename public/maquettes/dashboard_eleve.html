@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Élève - EduPlateforme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduPlay</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Mes Challenges</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Ma Progression</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-medal"></i>
+                    <span>Classement</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mon Profil</span>
+                </a>
+            </nav>
+            <div style="padding: 1.5rem 1rem; border-top: 1px solid var(--gray-200);">
+                <a href="login.html" class="nav-item" style="color: var(--danger);">
+                    <i class="fas fa-sign-out-alt" style="color: var(--danger);"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Topbar -->
+            <header class="topbar">
+                <h1 class="page-title">Bonjour, Alex 👋</h1>
+                <div class="topbar-right">
+                    <button class="notification-btn">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">A</div>
+                        <span style="font-weight: 500; font-size: 0.875rem;">Alex M.</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--gray-400);"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="main-content">
+                
+                <!-- Stats Row -->
+                <div class="grid grid-cols-4 animate-fade-in">
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value">1,250</div>
+                            <div class="stat-label">Points totaux</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--success-light); color: var(--success);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Challenges terminés</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--warning-light); color: var(--warning);">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Jours consécutifs</div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon" style="background-color: var(--danger-light); color: var(--danger);">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">#14</div>
+                            <div class="stat-label">Classement global</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progression Section -->
+                <div class="section-header animate-fade-in" style="animation-delay: 0.1s;">
+                    <h3>Ma Progression</h3>
+                </div>
+                <div class="card animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="grid grid-cols-3">
+                        <div>
+                            <div class="progress-header">
+                                <span>Mathématiques</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 75%; background-color: var(--primary);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="progress-header">
+                                <span>Physique</span>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 40%; background-color: #8B5CF6;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="progress-header">
+                                <span>Histoire</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 90%; background-color: var(--success);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Challenges En Cours -->
+                <div class="section-header animate-fade-in" style="animation-delay: 0.2s;">
+                    <h3>Challenges en cours</h3>
+                    <a href="#" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="grid grid-cols-3 animate-fade-in" style="animation-delay: 0.2s;">
+                    <!-- Challenge Card 1 -->
+                    <div class="card challenge-card">
+                        <div class="challenge-header">
+                            <div>
+                                <span class="badge badge-primary" style="margin-bottom: 0.5rem;">Niveau Difficile</span>
+                                <h4 class="challenge-title">Algèbre & Fonctions</h4>
+                                <span class="challenge-subject">Mathématiques</span>
+                            </div>
+                            <div class="stat-icon" style="width: 40px; height: 40px; font-size: 1.25rem;">
+                                <i class="fas fa-square-root-alt"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-meta">
+                            <div class="challenge-meta-item">
+                                <i class="far fa-clock"></i> 30 min
+                            </div>
+                            <div class="challenge-meta-item">
+                                <i class="far fa-question-circle"></i> 15 Questions
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <div class="progress-header" style="font-size: 0.75rem;">
+                                <span>Progression (6/15)</span>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar-bg" style="height: 6px;">
+                                <div class="progress-bar-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-footer">
+                            <span style="font-size: 0.875rem; color: var(--warning); font-weight: 500;">Expire dans 2j</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Reprendre</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nouveaux Challenges -->
+                <div class="section-header animate-fade-in" style="animation-delay: 0.3s;">
+                    <h3>Challenges disponibles</h3>
+                    <a href="#" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="grid grid-cols-3 animate-fade-in" style="animation-delay: 0.3s;">
+                    <!-- Challenge Card 2 -->
+                    <div class="card challenge-card">
+                        <div class="challenge-header">
+                            <div>
+                                <span class="badge badge-success" style="margin-bottom: 0.5rem;">Nouveau</span>
+                                <h4 class="challenge-title">La Révolution Française</h4>
+                                <span class="challenge-subject">Histoire</span>
+                            </div>
+                            <div class="stat-icon" style="width: 40px; height: 40px; font-size: 1.25rem; background-color: var(--success-light); color: var(--success);">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
+                            Testez vos connaissances sur les grands événements de 1789.
+                        </p>
+                        
+                        <div class="challenge-meta">
+                            <div class="challenge-meta-item">
+                                <i class="far fa-clock"></i> 20 min
+                            </div>
+                            <div class="challenge-meta-item">
+                                <i class="far fa-question-circle"></i> 10 Questions
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-footer">
+                            <span style="font-size: 0.875rem; font-weight: 500; color: var(--gray-500);">+200 pts</span>
+                            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Démarrer</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Challenge Card 3 -->
+                    <div class="card challenge-card">
+                        <div class="challenge-header">
+                            <div>
+                                <span class="badge badge-warning" style="margin-bottom: 0.5rem;">Bientôt terminé</span>
+                                <h4 class="challenge-title">Lois de Newton</h4>
+                                <span class="challenge-subject">Physique</span>
+                            </div>
+                            <div class="stat-icon" style="width: 40px; height: 40px; font-size: 1.25rem; background-color: var(--warning-light); color: var(--warning);">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 1rem;">
+                            Comprendre les 3 lois de la dynamique classique.
+                        </p>
+                        
+                        <div class="challenge-meta">
+                            <div class="challenge-meta-item">
+                                <i class="far fa-clock"></i> 45 min
+                            </div>
+                            <div class="challenge-meta-item">
+                                <i class="far fa-question-circle"></i> 20 Questions
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-footer">
+                            <span style="font-size: 0.875rem; font-weight: 500; color: var(--gray-500);">+450 pts</span>
+                            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Démarrer</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+</body>
+</html>
